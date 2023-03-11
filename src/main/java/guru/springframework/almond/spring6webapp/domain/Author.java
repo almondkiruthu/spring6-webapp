@@ -2,6 +2,7 @@ package guru.springframework.almond.spring6webapp.domain;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,14 +12,13 @@ public class Author {
     private Long id;
     private String firstName;
     private String lastName;
-
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
-    public Set<Book> getBook() {
+    private Set<Book> books = new HashSet<>();
+    public Set<Book> getBooks() {
         return books;
     }
 
-    public void setBook(Set<Book> book) {
+    public void setBooks(Set<Book> books) {
         this.books = books;
     }
 
@@ -44,6 +44,7 @@ public class Author {
     }
 
     public void setLastName(String lastName) {
+
         this.lastName = lastName;
     }
 
@@ -67,6 +68,7 @@ public class Author {
 
     @Override
     public int hashCode() {
+
         return getId() != null ? getId().hashCode() : 0;
     }
 }
