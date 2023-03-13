@@ -2,6 +2,7 @@ package guru.springframework.almond.spring6webapp.bootstrap;
 
 import guru.springframework.almond.spring6webapp.domain.Author;
 import guru.springframework.almond.spring6webapp.domain.Book;
+import guru.springframework.almond.spring6webapp.domain.Publisher;
 import guru.springframework.almond.spring6webapp.repositories.AuthorRepository;
 import guru.springframework.almond.spring6webapp.repositories.BookRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -45,11 +46,19 @@ public class BootstrapData implements CommandLineRunner {
         ericSaved.getBooks().add(dddSaved);
         rodSaved.getBooks().add(noEJBSaved);
 
-        authorRepository.save(ericSaved);
-        authorRepository.save(rodSaved);
+        Publisher publisher = new Publisher();
+        publisher.setPublisherName("My Publisher");
+        publisher.setAddress("123 Main");
+        Publisher savedPublisher = publisherRepository.save(publisher);
+
+        dddSaved.setPublisher(savedPublisher);
+        noEJB.setPublisher(savedPublisher);
+
 
         authorRepository.save(ericSaved);
         authorRepository.save(rodSaved);
+
+
 
 
 
